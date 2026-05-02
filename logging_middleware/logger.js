@@ -18,15 +18,22 @@ function log(track, level, package_, message) {
 
   const body = JSON.stringify(logEntry);
 
+  const authValue = process.env.EVALUATION_SERVICE_AUTH || process.env.EVAL_SERVER_API_KEY;
+  const headers = {
+    'Content-Type': 'application/json',
+    'Content-Length': Buffer.byteLength(body)
+  };
+
+  if (authValue) {
+    headers.Authorization = authValue.startsWith('Bearer ') ? authValue : `Bearer ${authValue}`;
+  }
+
   const options = {
     hostname: '20.207.122.201',
     port: 80,
     path: '/evaluation-service/logs',
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(body)
-    }
+    headers
   };
 
   const req = http.request(options, (res) => {
