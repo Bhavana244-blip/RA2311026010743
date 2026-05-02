@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const https = require('http');
+const http = require('http');
 
 const logFilePath = path.join(__dirname, 'logs.json');
 
@@ -30,7 +30,7 @@ function log(track, level, package_, message) {
     }
   };
 
-  const req = https.request(options, (res) => {
+  const req = http.request(options, (res) => {
     // Log sent successfully
   });
 
