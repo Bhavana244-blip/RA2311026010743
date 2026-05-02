@@ -3,9 +3,9 @@ const { loggingMiddleware, log } = require('../logging_middleware/logger');
 
 const app = express();
 app.use(express.json());
-app.use(loggingMiddleware); // ✅ auto-logs every request
+app.use(loggingMiddleware); 
 
-// ✅ Manual log example anywhere in your code:
+
 log('frontend', 'info', 'handler', 'Server started successfully');
 
 // Example route
